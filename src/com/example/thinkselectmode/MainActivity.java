@@ -19,7 +19,19 @@ public class MainActivity extends Activity {
         FrameLayout contain = new FrameLayout(this);
         contain.setBackgroundColor(Color.GRAY);
 
-        final DemoSelectableItemVeiw itemView = new DemoSelectableItemVeiw(this);
+        final SelectableItemViewWrapper<DemoContentView> itemView = new SelectableItemViewWrapper<DemoContentView>(
+                this) {
+
+            @Override
+            protected DemoContentView createContentView() {
+                return new DemoContentView(MainActivity.this);
+            }
+
+            @Override
+            protected int getContentViewHeight() {
+                return 60;
+            }
+        };
         contain.addView(itemView, new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.WRAP_CONTENT));
 
@@ -41,4 +53,36 @@ public class MainActivity extends Activity {
         this.setContentView(contain);
 
     }
+
+    // @Override
+    // protected void onCreate(Bundle savedInstanceState) {
+    // super.onCreate(savedInstanceState);
+    //
+    // FrameLayout contain = new FrameLayout(this);
+    // contain.setBackgroundColor(Color.GRAY);
+    //
+    // final DemoSelectableItemVeiw itemView = new DemoSelectableItemVeiw(this);
+    // contain.addView(itemView, new
+    // FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT,
+    // LayoutParams.WRAP_CONTENT));
+    //
+    // final Button button = new Button(this);
+    // button.setText("SWITCH");
+    // button.setOnClickListener(new View.OnClickListener() {
+    //
+    // @Override
+    // public void onClick(View aV) {
+    // itemView.switchSelectingMode();
+    // }
+    // });
+    //
+    // FrameLayout.LayoutParams buttonLP = new
+    // FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
+    // LayoutParams.WRAP_CONTENT);
+    // buttonLP.gravity = Gravity.CENTER;
+    // contain.addView(button, buttonLP);
+    //
+    // this.setContentView(contain);
+    //
+    // }
 }
